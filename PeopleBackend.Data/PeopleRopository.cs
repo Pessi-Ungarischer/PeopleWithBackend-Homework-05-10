@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,11 @@ namespace PeopleBackend.Data
         }
 
 
+
+        public void DeleteById(int id)
+        {
+            using PersonDbContext context = new(_connectionString);
+            context.Database.ExecuteSqlInterpolated($"DELETE FROM People WHERE Id = {id}");
+        }
     }
 }

@@ -18,21 +18,29 @@ namespace Homework_05_10_PeopleWithBackend.Web.Controllers
 
         [Route("addperson")]
         [HttpPost]
-        public string AddPerson(Person p)
+        public void AddPerson(Person p)
         {
             PeopleRopository pr = new(_connectionString);
             pr.AddPerson(p);
-            return p.FirstName;
         }
 
         [Route("GetAllPeople")]
         public List<Person> GetAllPeople()
         {
+            Thread.Sleep(1000);
             PeopleRopository pr = new(_connectionString);
-            List<Person> pl =  pr.GetAllPeople();
-            return pl;
+            return pr.GetAllPeople();
+             
         }
 
-       
+        [Route("DeleteById")]
+        [HttpPost]
+        public int DeleteById(int id)
+        {
+            PeopleRopository pr = new(_connectionString);
+            pr.DeleteById(id);
+            return id;
+        }
+
     }
 }
